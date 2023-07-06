@@ -1,10 +1,96 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AgGridAngular } from 'ag-grid-angular';
+import { CellClickedEvent, ColDef, GridReadyEvent } from 'ag-grid-community';
+import { Observable } from 'rxjs';
+import { CRUDService } from '../services/crud.service';
+import { ICellRendererAngularComp } from 'ag-grid-angular';
+import {ICellRendererParams} from "ag-grid-community";
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent {
+export class ProductListComponent implements OnInit{
+  columnDefs: ColDef[] = [
+    { field: 'p_name', headerName: 'Product Name', sortable: true,headerClass: 'header-cell' },
+    { field: 'p_description', headerName: 'Product Description', sortable: true,headerClass: 'header-cell' },
+    { field: 'p_price', headerName: 'Product Price', sortable: true,headerClass: 'header-cell' },
+    
+    {
+    field: '',
+    headerName: 'Actions',
+    headerClass: 'header-cell',
+    width: 300 ,
+    cellRenderer: this.actionRenderer.bind(this)
+  }
+];
 
+rowData: any = [];
+gridOptions = {
+  rowHeight: 50
+}
+
+productList: any = [];
+productListSubscribe: any;
+constructor(private crudService: CRUDService,
+  private router:Router){}
+  ngOnInit(): void{
+    this.getProductList();
+  }
+
+  getProductList(){
+    this.productListSubscribe = this.crudService.loadProducts().subscribe(res => {
+      this.productList = res;
+      this.rowData = res;
+    })
+  }
+
+  actionRenderer(params: any){
+    let div = document.createElement('div');
+
+    let htmlCode = '<button type="button" Class="btn btn-success">View</button>\n' +
+    '<button type="button" Class="btn btn-danger">Delete</button>\n' +
+    '<button type="button" Class="btn btn-warning">Edit</button>'
+    div.innerHTML = htmlCode;
+    
+    let viewButton = div.querySelector('.btn-success');
+    // @ts-ignore
+    viewButton.addEventListener('click',()=>{
+      console.log('view clicked');
+      this.viewProductDetails(params);
+    });
+
+    let editButton = div.querySelector('.btn-warning');
+    // @ts-ignore
+    editButton.addEventListener('click',()=>{
+      console.log('view clicked');
+      this.editProductDetails(params);
+    });
+    
+    let deleteButton = div.querySelector('.btn-danger');
+    // @ts-ignore
+    deleteButton.addEventListener('click',()=>{
+      console.log('view clicked');
+      this.deleteProductDetails(params);
+    });
+
+    return div;
+  }
+
+  viewProductDetails(params: any){
+    console.log('params', params);
+    this.router.navigate(['./crud/view-product-details/' + params.data.p_id]);
+  }
+
+  editProductDetails(params: any){
+    this.router.navigate(['./crud/update-product/' + params.data.p_id]);
+  }
+
+  deleteProductDetails(params: any){
+    console.log('delete');
+  }
 }
