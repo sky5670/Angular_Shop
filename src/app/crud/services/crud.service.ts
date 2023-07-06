@@ -12,6 +12,7 @@ import {
   HttpHandler,
   HttpRequest
 } from '@angular/common/http';
+import { Product } from '../models/product';
 
 
 @Injectable({
@@ -22,13 +23,18 @@ export class CRUDService {
   constructor(private httpClient: HttpClient) { }
 
   loadProducts(){
-    const url = environment.API_EndPoint + 'view.php';
+    const url = environment.API_EndPoint + 'http://localhost/web_api/view.php/view.php';
     return this.httpClient.get(url).pipe(map(data => data));
   }
 
   createProduct(data: any): Observable<Response>{
     
-    const url = environment.API_EndPoint + 'create.php';
+    const url = environment.API_EndPoint + 'http://localhost/web_api/create.php';
     return this.httpClient.post<Response>(url, data).pipe(map(data => data));
+  }
+
+  loadProductInfo(productId: any): Observable<Product>{
+    const url = environment.API_EndPoint + 'http://localhost/web_api/view_one.php?id=' + productId;
+    return this.httpClient.get<Product>(url).pipe(map(data => data));
   }
 }

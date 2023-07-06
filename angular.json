@@ -26,16 +26,14 @@
             ],
             "styles": [
               "src/styles.css",
-              "node_modules/bootsrap/dist/css/bootstrap.css",
-              "node_modules/bootsrap/dist/css/bootstrap-min.css",
-              "node_modules/bootsrap/dist/css/bootstrap-grid.css",
-              "node_modules/bootsrap/dist/css/bootstrap-reboot.css",
-              "node_modules/bootsrap/dist/css/bootstrap-utilities.css"
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/bootstrap/dist/css/bootstrap-grid.css",
+              "node_modules/bootstrap/dist/css/bootstrap-reboot.css",
+              "node_modules/bootstrap/dist/css/bootstrap-utilities.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/popper.js/dist/popper.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "node_modules/jquery/dist/jquery.min.js"
             ]
           },
           "configurations": {

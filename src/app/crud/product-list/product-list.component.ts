@@ -46,6 +46,7 @@ constructor(private crudService: CRUDService,
     this.productListSubscribe = this.crudService.loadProducts().subscribe(res => {
       this.productList = res;
       this.rowData = res;
+      console.log('res',res);
     })
   }
 
