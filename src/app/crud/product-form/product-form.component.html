@@ -1,4 +1,4 @@
-<p>product-form works!</p>
+<h1>Crea un producto</h1>
 <div class="row">
     <div class="col-6 p-5">
 <form [formGroup]="productForm" (ngSubmit)="createProduct(productForm.value, false)">
@@ -25,10 +25,18 @@
       ></textarea>
     </div>
 
+    
+
     <div class="mb-3">
         <label for="product-price" class="form-label">Product Price</label>
         <input formControlName="price" type="text" class="form-control" id="product-price">
       </div>
+
+      <div class="mb-3">
+        <label for="product-image" class="form-label">Product image</label>
+        <input formControlName="image" type="file" class="form-control" id="product-image">
+      </div>
+    
     <button type="submit" class="btn btn-primary">{{buttonText}}</button>
   </form>
 </div>
