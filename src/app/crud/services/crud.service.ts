@@ -42,4 +42,10 @@ export class CRUDService {
     const url = environment.API_EndPoint + 'http://localhost/web_api/update.php';
     return this.httpClient.post<Response>(url, data).pipe(map(data => data));
   }
+
+  deleteProduct(productId: any): Observable<Response>{
+    const url = environment.API_EndPoint + 'http://localhost/web_api/delete.php?id='+productId;
+    return this.httpClient.get<Response>(url).pipe(map(data => data));
+  }
+
 }
