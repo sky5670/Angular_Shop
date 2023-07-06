@@ -37,4 +37,9 @@ export class CRUDService {
     const url = environment.API_EndPoint + 'http://localhost/web_api/view_one.php?id=' + productId;
     return this.httpClient.get<Product>(url).pipe(map(data => data));
   }
+
+  updateProductDetails(data: any): Observable<Response>{
+    const url = environment.API_EndPoint + 'http://localhost/web_api/update.php';
+    return this.httpClient.post<Response>(url, data).pipe(map(data => data));
+  }
 }

@@ -18,7 +18,7 @@ export class ProductListComponent implements OnInit{
   columnDefs: ColDef[] = [
     { field: 'p_name', headerName: 'Product Name', sortable: true,headerClass: 'header-cell' },
     { field: 'p_description', headerName: 'Product Description', sortable: true,headerClass: 'header-cell' },
-    { field: 'p_price', headerName: 'Product Price', sortable: true,headerClass: 'header-cell' },
+    { field: 'p_price', headerName: 'Product Price', sortable: true,headerClass: 'header-cell', cellRenderer: this.priceCellRender.bind(this) },
     
     {
     field: '',
@@ -93,5 +93,9 @@ constructor(private crudService: CRUDService,
 
   deleteProductDetails(params: any){
     console.log('delete');
+  }
+
+  priceCellRender(params: any){
+    return '$' + params.data.p_price;
   }
 }
