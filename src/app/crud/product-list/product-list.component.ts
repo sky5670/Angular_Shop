@@ -20,7 +20,6 @@ export class ProductListComponent implements OnInit{
     { field: 'p_name', headerName: 'Product Name', sortable: true,headerClass: 'header-cell' },
     { field: 'p_description', headerName: 'Product Description', sortable: true,headerClass: 'header-cell' },
     { field: 'p_price', headerName: 'Product Price', sortable: true,headerClass: 'header-cell', cellRenderer: this.priceCellRender.bind(this) },
-    { field: 'p_image', headerName: 'Product Image', sortable: true,headerClass: 'header-cell' },
     
     {
     field: '',
