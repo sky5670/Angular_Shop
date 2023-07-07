@@ -53,7 +53,7 @@ export class ProductFormComponent implements OnInit{
     });
   }
 
-  createProduct(values: any, isUpdate: any){
+  createProduct(values: any){
     console.log(values);
     let formData = new FormData();
     formData.append('name', values.name);
@@ -63,7 +63,7 @@ export class ProductFormComponent implements OnInit{
 
     if(this.productId){
       //para actualizar
-      formData.append('id', this.productId);
+      formData.append('$id', this.productId);
       //formData.append('description', this.productId);
       //formData.append('price', this.productId);
       this.crudService.updateProductDetails(formData).subscribe((res: any) => {
