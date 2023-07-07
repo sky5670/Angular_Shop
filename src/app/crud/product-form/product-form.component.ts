@@ -45,20 +45,25 @@ export class ProductFormComponent implements OnInit{
       price: ['', Validators.compose([
         Validators.required,
         Validators.minLength(1),
-        Validators.maxLength(10)])]
+        Validators.maxLength(10)])],
+      image: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(200)])]
     });
   }
 
-  createProduct(values: any, isUpdate: any){
+  createProduct(values: any){
     console.log(values);
     let formData = new FormData();
     formData.append('name', values.name);
     formData.append('description', values.description);
     formData.append('price', values.price);
+    formData.append('image', values.image);
 
     if(this.productId){
       //para actualizar
-      formData.append('id', this.productId);
+      formData.append('$id', this.productId);
       //formData.append('description', this.productId);
       //formData.append('price', this.productId);
       this.crudService.updateProductDetails(formData).subscribe((res: any) => {
@@ -81,10 +86,11 @@ export class ProductFormComponent implements OnInit{
 
   loadProductDetails(productId: any){
       this.buttonText = 'Update Product';
-      this.crudService.loadProductInfo(productId).subscribe(res => {
+      this.crudService.loadProductInfo(productId).subscribe((res: any) => {
       this.productForm.controls['name'].setValue(res.p_name);
       this.productForm.controls['description'].setValue(res.p_description);
       this.productForm.controls['price'].setValue(res.p_price);
+      this.productForm.controls['image'].setValue(res.p_image);
       this.productId = res.p_id;
     });
   }
